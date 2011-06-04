@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Magic
+GenericName=Magic The Gathering
+Comment=Play Magic: The Gathering with your own decks in a free environment
+Exec=./exec
+StartupWMClass=Java
+Icon=card_hand_icon.png
+Type=Application

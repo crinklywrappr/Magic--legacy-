@@ -1,0 +1,30 @@
+#!/bin/bash
+
+mem=""
+base_dir=""
+name=""
+args=""
+
+for i in `cat magic.conf`
+do
+	var=`echo $i | cut -d "=" -f 1`
+	val=`echo $i | cut -d "\"" -f 2`
+	if [ $var == "MEM" ]
+	then
+		mem=$val
+	elif [ $var == "DECK_BASE" ]
+	then
+		base_dir=$val
+	else
+		echo "variable $var not known"
+	fi
+done
+
+for i in `ls $base_dir/*.deck`
+do
+	name=`echo $i | sed s/".*\/"/""/g | cut -d "." -f 1`
+	args="$args $name $i"
+done
+
+echo "java -Xmx$mem\m -classpath ./swing-layout-1.0.1.jar:. frame $base_dir $args"
+java -Xmx$mem\m -classpath ./swing-layout-1.0.1.jar:. frame $base_dir $args
